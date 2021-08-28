@@ -1,14 +1,24 @@
-import React from 'react';
-import {NavLink} from 'react-router-dom';
+import React, {Component} from 'react';
+import {NavLink,
+    withRouter
+} from 'react-router-dom';
 
-const Nav = () => (
-    <nav class="main-nav">
-        <ul>
-            <li><NavLink to='/cats'>Cats</NavLink></li>
-            <li><NavLink to='/dogs'>Dogs</NavLink></li>
-            <li><NavLink to='/computers'>Computers</NavLink></li>
-        </ul>
-    </nav>
-)
+class Nav extends Component {
+    handleNav = (e) => {        
+        this.props.onNav(e.target.textContent.toLowerCase());
+    }
 
-export default Nav;
+    render () {
+        return (
+            <nav className="main-nav">
+                <ul>
+                    <li><NavLink to="/search/cats" onClick={this.handleNav}>Cats</NavLink></li>
+                    <li><NavLink to="/search/dogs" onClick={this.handleNav}>Dogs</NavLink></li>
+                    <li><NavLink to="/search/unicorns" onClick={this.handleNav}>Unicorns</NavLink></li>
+                </ul>
+            </nav>
+        )
+    }
+}
+
+export default withRouter(Nav);
