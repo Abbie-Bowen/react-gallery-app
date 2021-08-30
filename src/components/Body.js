@@ -27,7 +27,7 @@ class Body extends Component {
                     <Route exact path="/" render={() => <Redirect to={`/search/${this.props.topic}`} /> } />
                     <Route path="/search/:topic" render={({match}) => <Gallery urlTopic={match.params.topic} topic={this.props.topic} photos={this.props.photos} getNewImages={this.props.getNewImages}/>} />
                     <Route exact path="/404" component={SearchError} />
-                    <Route exact path="/no_results" component={NotFound} />
+                    <Route exact path="/noresults" component={NotFound} />
                 </Switch>
             </div>
         );
