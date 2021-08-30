@@ -4,8 +4,14 @@ import {NavLink,
 } from 'react-router-dom';
 
 class Nav extends Component {
+    constructor(props) {
+        super(props);
+
+        this.handleNav = this.handleNav.bind(this);
+    }
+
     handleNav = (e) => {        
-        this.props.onNav(e.target.textContent.toLowerCase());
+        this.props.newSearch(e.target.textContent.toLowerCase());
     }
 
     render () {

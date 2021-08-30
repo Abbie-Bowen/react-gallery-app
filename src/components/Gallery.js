@@ -1,20 +1,36 @@
-import React from 'react';
+import React, {Component} from 'react';
 import Photo from './Photo';
+import {withRouter} from 'react-router';
 
-const Gallery = (props) => {
-    let topic = props.topic;
-    let photos = props.photos.map((photo) => {
-        return <Photo src={`https://live.staticflickr.com/${photo.server}/${photo.id}_${photo.secret}_q.jpg`} alt={photo.title} key={photo.id} />
-    });
+class Gallery extends Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            headerTopic: this.props.topic
+        }
+    }
 
-   return (
-    <div className="photo-container">
-        <h2>Photos of {topic}</h2>
-        <ul>
-            {photos}
-        </ul>
-    </div>
-   );
+    componentDidUpdate() {
+        if ((this.props.urlTopic) && (this.props.urlTopic !== this.props.topic)) {
+            this.setState({headerTopic: this.props.urlTopic});
+            this.props.getNewImages(this.props.urlTopic);
+        } 
+    }
+
+    render () {
+        let photos = this.props.photos.map((photo) => {
+            return <Photo src={`https://live.staticflickr.com/${photo.server}/${photo.id}_${photo.secret}_q.jpg`} alt={photo.title} key={photo.id} />
+        });
+
+        return (
+            <div className="photo-container">
+            <h2>Results for {this.state.headerTopic}</h2>
+                <ul>
+                    {photos}
+                </ul>
+            </div>
+        );
+    }
 }
 
-export default Gallery;
+export default withRouter(Gallery);

@@ -3,8 +3,12 @@ import {withRouter} from 'react-router-dom';
 
 class SearchForm extends Component {
 
-    state= {
-        searchText: ''
+    constructor(props) {
+        super(props);
+        this.state ={ searchText: ''};
+
+        this.onSearchChange = this.onSearchChange.bind(this);
+        this.handleSubmit = this.handleSubmit.bind(this);
     }
 
     onSearchChange = (e) => {
@@ -13,7 +17,8 @@ class SearchForm extends Component {
 
     handleSubmit = (e) => {
         e.preventDefault();
-        this.props.onSearch(this.state.searchText);
+        this.props.newSearch(this.state.searchText);
+        this.props.history.push(`/search/${this.state.searchText}`);
         e.currentTarget.reset();
     }
 
