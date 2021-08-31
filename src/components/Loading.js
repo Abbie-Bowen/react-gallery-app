@@ -1,5 +1,7 @@
 import React from 'react';
 
+//loading icon from giphy.com
+
 const Loading = () => (
     <div>
         <iframe src="https://giphy.com/embed/xTk9ZvMnbIiIew7IpW" width="100%" height="100%" style={{position : "relative"}} frameBorder="0" className="giphy-embed" allowFullScreen title="spinner" />
